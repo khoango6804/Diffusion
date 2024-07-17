@@ -1,9 +1,7 @@
-#Adapted from : https://github.com/MC-E/DragonDiffusion/blob/master/src/unet/estimator.py
 from diffusers.models.unet_2d_condition import UNet2DConditionModel
 from typing import Any, Dict, Optional, Union
 import torch
 import numpy as np
-
 
 class MyUNet2DConditionModel(UNet2DConditionModel):
     def forward(

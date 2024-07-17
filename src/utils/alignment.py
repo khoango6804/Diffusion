@@ -1,5 +1,3 @@
-# Adapted from https://github.com/MC-E/DragonDiffusion/blob/master/src/utils/alignment.py
-
 import numpy as np
 import PIL
 import PIL.Image

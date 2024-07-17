@@ -2,11 +2,8 @@ import os
 import subprocess
 import shlex
 
-
-
 def download_all():
     # create examples
-    """
     os.makedirs('examples/appearance', exist_ok=True)
     os.makedirs('examples/drag', exist_ok=True)
     os.makedirs('examples/move', exist_ok=True)
@@ -51,19 +48,9 @@ def download_all():
     subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/examples/appearance/004_base.jpg -O examples/appearance/004_base.jpg'))
     subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/examples/appearance/005_replace.jpg -O examples/appearance/005_replace.jpg'))
     subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/examples/appearance/005_base.jpeg -O examples/appearance/005_base.jpeg'))
+
     # download checkpoints
-"""
     os.makedirs('models', exist_ok=True)
-    subprocess.run(shlex.split('wget https://huggingface.co/datasets/Ekanari/AIToolForRoomDecoration/resolve/main/models/efficient_sam_vits.pt -O models/efficient_sam_vits.pt'))
-    subprocess.run(shlex.split('wget https://huggingface.co/datasets/Ekanari/AIToolForRoomDecoration/resolve/main/models/ip_sd15_64.bin -O models/ip_sd15_64.bin'))
-
-def check_and_download():
-    """Checks if the 'examples' and 'models' directories exist and are not empty,
-        and calls the download_all() function if either condition is not met.
-    """
-    main_project_dir = os.getcwd()  # Get the current working directory
-
-    for directory in ["models"]:
-        directory_path = os.path.join(main_project_dir, directory)
-        if (not os.path.exists(directory_path)) and (os.listdir(directory_path)):
-            download_all()
+    subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/model/ip_sd15_64.bin -O models/ip_sd15_64.bin'))
+    subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/model/shape_predictor_68_face_landmarks.dat -O models/shape_predictor_68_face_landmarks.dat'))
+    subprocess.run(shlex.split('wget https://huggingface.co/Adapter/DragonDiffusion/resolve/main/model/efficient_sam_vits.pt -O models/efficient_sam_vits.pt'))

@@ -1,5 +1,3 @@
-#Adapted from : https://github.com/MC-E/DragonDiffusion/tree/master
-
 import numpy as np
 import gradio as gr
 import cv2
@@ -10,15 +8,13 @@ from PIL import Image
 
 from sam.efficient_sam.build_efficient_sam import build_efficient_sam_vits
 from src.utils.utils import resize_numpy_image
-from src.freeU.free_lunch_utils import register_free_upblock2d, register_upblock2d
-
 
 sam = build_efficient_sam_vits()
+
 def show_point_or_box(image, global_points):
     # for point
-    print(len(global_points))
     if len(global_points) == 1:
-        image = cv2.circle(image, center = global_points[0], radius=10, color = (0, 0, 255), thickness = -1)
+        image = cv2.circle(image, global_points[0], 10, (0, 0, 255), -1)
     # for box
     if len(global_points) == 2:
         p1 = global_points[0]
@@ -26,13 +22,7 @@ def show_point_or_box(image, global_points):
         image = cv2.rectangle(image,(int(p1[0]),int(p1[1])),(int(p2[0]),int(p2[1])),(0,0,255),2)
 
     return image
-
-
-def draw_box(image, point1, point2):
-    p1 = (int(point1[0]), int(point1[1]))
-    p2 = (int(point2[0]), int(point2[1]))
-    return cv2.rectangle(image, p1, p2, (0, 0, 255), 2)
-
+    
 def segment_with_points(
     image,
     original_image,
@@ -297,8 +287,3 @@ def mask_image(image, mask, color=[255,0,0], alpha=0.5, max_resolution=None):
     contours = cv2.findContours(np.uint8(deepcopy(mask)), cv2.RETR_TREE, 
                         cv2.CHAIN_APPROX_SIMPLE)[-2:]
     return out
-
-def freeU(prompt, b1, b2, s1, s2):
-    register_free_upblock2d()
-    register_upblock2d()
-    return prompt, b1, b2, s1, s2
